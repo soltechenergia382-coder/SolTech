@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SolTech Energia</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Helvetica Neue', sans-serif;
+      background: linear-gradient(rgba(255,255,255,0.3), rgba(255,255,255,0.3)), url('blue-solar.jpg');
+      color: #1f2937;
+    }
+
+    header {
+      background-color: #facc15;
+    }
+
+    .tab-button {
+      background-color: #fef9c3;
+      color: #b45309;
+      border: 1px solid #facc15;
+    }
+
+    .tab-button:hover {
+      background-color: #fde047;
+      color: #78350f;
+    }
+
+    .tab-content {
+      display: none;
+    }
+
+    .active-tab {
+      display: block;
+    }
+
+    input, select {
+      background-color: #fffbea;
+      color: #1f2937;
+      border: 1px solid #facc15;
+    }
+
+    input:focus, select:focus {
+      outline: none;
+      border-color: #f59e0b;
+      box-shadow: 0 0 5px #facc15;
+    }
+
+    button[type="submit"] {
+      background-color: #facc15;
+      color: #1f2937;
+      font-weight: bold;
+    }
+
+    button[type="submit"]:hover {
+      background-color: #fbbf24;
+    }
+
+    .card {
+      background-color: #fffef3;
+      border: 1px solid #fef3c7;
+      border-radius: 1rem;
+      padding: 2rem;
+    }
+
+    canvas {
+      background-color: #fff;
+      border-radius: 0.5rem;
+    }
+
+    video {
+      border: 2px solid #facc15;
+      border-radius: 0.5rem;
+    }
+
+    #resultado {
+      color: #065f46;
+    }
+  </style>
+</head>
+<body background="blue-solar.jpg">
+  <div class="flex flex-col min-h-screen">
+
+    <!-- Cabeçalho -->
+    <header class="shadow-lg p-7 text-center">
+      <h1 class="text-5xl font-bold text-white flex items-center justify-center gap-4">
+        SolTech Energia
+        <img src="logo.png" alt="Logo SolTech" width="80" height="80" class="inline-block" />
+      </h1>
+    </header>
+
+    <!-- Navegação -->
+    <nav class="flex justify-center gap-6 shadow-md p-6" style="background-color: #023e48;">
+      <button class="px-5 py-2 rounded-lg border border-white text-white hover:bg-black hover:opacity-60 hover:text-white transition" data-tab="home">Home</button>
+      <button class="px-5 py-2 rounded-lg border border-white text-white hover:bg-black hover:opacity-60 hover:text-white transition" data-tab="info">Informações</button>
+      <button class="px-5 py-2 rounded-lg border border-white text-white hover:bg-black hover:opacity-60 hover:text-white transition" data-tab="calc">Simulação</button>
+    </nav>
+
+    <!-- Conteúdo principal -->
+    <main class="flex-grow p-6 max-w-screen-xl mx-auto">
+
+      <!-- Home -->
+      <section id="home" class="tab-content active-tab py-12">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 px-4">
+          <!-- Cards Home -->
+          <a href="reducao-conta.html" class="block p-6 bg-yellow-50 border border-yellow-200 rounded-xl shadow hover:shadow-lg transition">
+            <h3 class="text-lg font-semibold text-yellow-700 mb-2">Reduza sua conta</h3>
+            <p>Economize até 95% na conta de luz com energia solar.</p>
+          </a>
+          <a href="valor-imovel.html" class="block p-6 bg-yellow-50 border border-yellow-200 rounded-xl shadow hover:shadow-lg transition">
+            <h3 class="text-lg font-semibold text-yellow-700 mb-2">Valorize seu imóvel</h3>
+            <p>Aumente o valor de mercado da sua propriedade.</p>
+          </a>
+          <a href="energia-limpa.html" class="block p-6 bg-yellow-50 border border-yellow-200 rounded-xl shadow hover:shadow-lg transition">
+            <h3 class="text-lg font-semibold text-yellow-700 mb-2">Energia sustentável</h3>
+            <p>Contribua com o meio ambiente usando energia limpa.</p>
+          </a>
+          <a href="autonomia.html" class="block p-6 bg-yellow-50 border border-yellow-200 rounded-xl shadow hover:shadow-lg transition">
+            <h3 class="text-lg font-semibold text-yellow-700 mb-2">Autonomia energética</h3>
+            <p>Produza sua própria energia e dependa menos da rede pública.</p>
+          </a>
+          <a href="suporte.html" class="block p-6 bg-yellow-50 border border-yellow-200 rounded-xl shadow hover:shadow-lg transition">
+            <h3 class="text-lg font-semibold text-yellow-700 mb-2">Suporte técnico</h3>
+            <p>Conte com instalação e manutenção especializada.</p>
+          </a>
+          <a href="incentivos.html" class="block p-6 bg-yellow-50 border border-yellow-200 rounded-xl shadow hover:shadow-lg transition">
+            <h3 class="text-lg font-semibold text-yellow-700 mb-2">Incentivos fiscais</h3>
+            <p>Saiba como aproveitar os benefícios e financiamentos.</p>
+          </a>
+          <a href="retorno.html" class="block p-6 bg-yellow-50 border border-yellow-200 rounded-xl shadow hover:shadow-lg transition">
+            <h3 class="text-lg font-semibold text-yellow-700 mb-2">Retorno garantido</h3>
+            <p>Economia a longo prazo com investimento sustentável.</p>
+          </a>
+          <a href="iot.html" class="block p-6 bg-yellow-50 border border-yellow-200 rounded-xl shadow hover:shadow-lg transition">
+            <h3 class="text-lg font-semibold text-yellow-700 mb-2">Monitoramento IoT</h3>
+            <p>Acompanhe a performance do sistema em tempo real.</p>
+          </a>
+        </div>
+      </section>
+
+      <!-- Informações -->
+      <section id="info" class="tab-content">
+        <div class="grid md:grid-cols-2 gap-8 card max-w-6xl mx-auto">
+          <div class="card">
+            
+            <h2 class="text-3xl font-semibold mb-6 text-yellow-600">Como funciona a energia solar?</h2>
+            <ul class="list-disc pl-6 space-y-2 text-lg">
+              <li>Painéis captam luz solar e a convertem em eletricidade.</li>
+              <li>O inversor transforma corrente contínua em alternada.</li>
+              <li>Você usa a energia gerada em tempo real ou armazena em baterias.</li>
+              <li>O excedente pode ser enviado para a rede elétrica, gerando créditos.</li>
+              <li>Economia de até 95% na conta de energia.</li>
+              <li>Sistemas duráveis com vida útil superior a 25 anos.</li>
+              <li>Baixa manutenção e alta eficiência energética.</li>
+              <li>Contribuição direta para redução de CO₂.</li>
+              <li>Possibilidade de financiamento com bancos parceiros.</li>
+              <li>Ideal para residências, comércios e propriedades rurais.</li>
+              <li>Compatível com diferentes tipos de telhados.</li>
+            </ul>
+          </div>
+          <div class="card flex justify-center items-center">
+            <video autoplay muted controls width="100%" class="rounded shadow-md">
+              <source src="comof.mp4" type="video/mp4">
+              Seu navegador não suporta a reprodução de vídeo.
+            </video>
+          </div> 
+          <p align="right"> <h3>Conheça empresas locais de energia solar</h3> </p>
+           <p align="left">  <a href="https://www.google.com/maps/search/empresas+energia+solar/@-13.8581907,-40.066208,13z?entry=ttu&g_ep=EgoyMDI1MDcyMy4wIKXMDSoASAFQAw%3D%3D"> <font color="blue"> <u>Clique aqui!</u> </font>  </a> </p>
+        </div>
+      </section>
+
+      <!-- Simulação -->
+      <section id="calc" class="tab-content">
+        <div class="flex flex-col lg:flex-row gap-6">
+          <form id="solarForm" class="space-y-4 card flex-1 max-w-lg">
+            <label class="block">
+              <span class="font-semibold">Consumo médio mensal (kWh):</span>
+              <input type="number" id="consumo" class="w-full p-2 rounded mt-1" required />
+            </label>
+            <label class="block">
+              <span class="font-semibold">Preço da energia (R$/kWh):</span>
+              <input type="number" step="0.01" id="preco" class="w-full p-2 rounded mt-1" required />
+            </label>
+            <label class="block">
+              <span class="font-semibold">Tipo de telhado:</span>
+              <select id="telhado" class="w-full p-2 rounded mt-1">
+                <option value="ceramica">Cerâmica</option>
+                <option value="metalico">Metálico</option>
+                <option value="fibrocimento">Fibrocimento</option>
+                <option value="plano">Plano</option>
+              </select>
+            </label>
+            <label class="block">
+              <span class="font-semibold">Região:</span>
+              <select id="regiao" class="w-full p-2 rounded mt-1">
+                <option value="norte">Norte</option>
+                <option value="nordeste">Nordeste</option>
+                <option value="centro-oeste">Centro-Oeste</option>
+                <option value="sudeste">Sudeste</option>
+                <option value="sul">Sul</option>
+              </select>
+            </label>
+            <label class="block">
+              <span class="font-semibold">Fonte de energia:</span>
+              <select id="fonte" class="w-full p-2 rounded mt-1">
+                <option value="solar">Solar</option>
+                <option value="eolica">Eólica</option>
+                <option value="biomassa">Biomassa</option>
+              </select>
+            </label>
+            <button type="submit" class="w-full px-4 py-2 rounded transition">Calcular</button>
+            <div id="resultado" class="mt-4 text-center font-semibold"></div>
+          </form>
+
+          <!-- Gráficos -->
+          <div class="flex-1 card">
+            <h3 class="text-center text-lg font-semibold mb-4 text-yellow-600">Comparativo de Economia Mensal</h3>
+            <canvas id="graficoEconomia" class="w-full h-[250px]"></canvas>
+            <h3 class="text-center text-lg font-semibold mt-10 mb-4 text-yellow-600">Eficiência Energética por Fonte</h3>
+            <canvas id="graficoEficiencia" class="w-full h-[200px]"></canvas>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Rodapé -->
+    <footer class="bg-gray-800 text-white text-center py-4">
+      <p>&copy; 2025 SolTech Energia. Todos os direitos reservados.</p>
+    </footer>
+
+  </div> <!-- fim do flex wrapper -->
+
+  <script>
+    const buttons = document.querySelectorAll('nav button');
+    const contents = document.querySelectorAll('.tab-content');
+
+    function ativarAba(tabId) {
+      contents.forEach(c => c.classList.remove('active-tab'));
+      document.getElementById(tabId).classList.add('active-tab');
+
+      buttons.forEach(b => {
+        b.classList.remove('bg-white', 'text-[#023e48]');
+        b.classList.add('text-white');
+        if (b.dataset.tab === tabId) {
+          b.classList.add('bg-white', 'text-[#023e48]');
+          b.classList.remove('text-white');
+        }
+      });
+    }
+
+    buttons.forEach(button => {
+      button.addEventListener('click', () => {
+        const tab = button.dataset.tab;
+        ativarAba(tab);
+      });
+    });
+
+    let chart;
+    let eficienciaChart;
+
+    document.getElementById('solarForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+      ativarAba('calc');
+
+      const consumo = parseFloat(document.getElementById('consumo').value);
+      const preco = parseFloat(document.getElementById('preco').value);
+      const regiao = document.getElementById('regiao').value;
+      const fonte = document.getElementById('fonte').value;
+
+      let fatorRegiao = {
+        norte: 1.1, nordeste: 1.2, 'centro-oeste': 1.15, sudeste: 1.05, sul: 0.95
+      }[regiao] || 1;
+
+      const fatores = { solar: 0.85, eolica: 0.65, biomassa: 0.70 };
+      const fatorFonte = fatores[fonte] || 0.85;
+
+      const economiaAnual = consumo * preco * 12 * fatorFonte * fatorRegiao;
+      const economiaMensal = economiaAnual / 12;
+      const investimento = 25000;
+      const payback = investimento / economiaAnual;
+
+      document.getElementById('resultado').innerHTML = `
+        🔋 <strong>Fonte:</strong> ${fonte.charAt(0).toUpperCase() + fonte.slice(1)}<br>
+        ✅ <strong>Economia mensal:</strong> R$ ${economiaMensal.toFixed(2)}<br>
+        💰 <strong>Economia anual:</strong> R$ ${economiaAnual.toFixed(2)}<br>
+        ⏳ <strong>Payback:</strong> ${payback.toFixed(1)} anos
+      `;
+
+      const meses = ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'];
+      const economiaData = {
+        labels: meses,
+        datasets: Object.entries(fatores).map(([key, val]) => ({
+          label: key.charAt(0).toUpperCase() + key.slice(1),
+          data: Array(12).fill(consumo * preco * val * fatorRegiao),
+          backgroundColor: key === 'solar' ? 'rgba(251,191,36,0.6)' :
+                           key === 'eolica' ? 'rgba(3,102,214,0.5)' :
+                           'rgba(239,68,68,0.4)',
+          borderColor: key === 'solar' ? 'rgba(202,138,4,1)' :
+                        key === 'eolica' ? 'rgba(3,102,214,1)' :
+                        'rgba(239,68,68,1)',
+          borderWidth: 1
+        }))
+      };
+
+      const configEconomia = { type: 'bar', data: economiaData, options: { scales: { y: { beginAtZero: true } } } };
+      if (chart) chart.destroy();
+      chart = new Chart(document.getElementById('graficoEconomia'), configEconomia);
+
+      const eficienciaData = {
+        labels: ['Solar', 'Eólica', 'Biomassa'],
+        datasets: [{
+          label: 'Eficiência Energética (%)',
+          data: [85, 65, 70],
+          backgroundColor: ['rgba(251,191,36,0.7)', 'rgba(3,102,214,0.7)', 'rgba(239,68,68,0.7)'],
+          borderColor: ['rgba(202,138,4,1)', 'rgba(3,102,214,1)', 'rgba(239,68,68,1)'],
+          borderWidth: 1
+        }]
+      };
+
+      const configEficiencia = {
+        type: 'bar',
+        data: eficienciaData,
+        options: { indexAxis: 'y', scales: { x: { beginAtZero: true, max: 100 } } }
+      };
+
+      if (eficienciaChart) eficienciaChart.destroy();
+      eficienciaChart = new Chart(document.getElementById('graficoEficiencia'), configEficiencia);
+    });
+  </script>
+</body>
+</html>
